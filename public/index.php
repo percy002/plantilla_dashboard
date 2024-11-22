@@ -10,7 +10,7 @@ switch ($uri) {
     case '/':
         require '../pages/portada.php';
         break;
-    case '/empresa':
+    case '/nosotros':
         require '../pages/empresa.php';
         break;
     case '/productos':
