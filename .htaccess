@@ -1,0 +1,16 @@
+# Habilitar la reescritura de URLs
+RewriteEngine On
+
+# Establecer el archivo index predeterminado en public/index.php
+DirectoryIndex public/index.php
+
+# Forzar HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Evitar procesar archivos o directorios existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir a public/index.php
+RewriteRule ^ public/index.php [QSA,L]
