@@ -1,27 +1,15 @@
-<?php
-require_once '../config/database.php';
+<?php include 'includes/navbar.php' ?>
 
-// Consultar productos
-$query = $pdo->query("SELECT * FROM productos");
-$productos = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-</head>
-<body>
-    <h1>Productos</h1>
-    <ul>
-        <?php foreach ($productos as $producto): ?>
-            <li>
-                <strong><?= htmlspecialchars($producto['nombre_producto']) ?></strong><br>
-                Precio: <?= number_format($producto['precio'], 2) ?><br>
-                Descripción: <?= htmlspecialchars($producto['descripcion']) ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</body>
-</html>
+<div class="pagina-encabezado bg-concrete">
+    <div class="">
+        <h1>Nuestros Servicios</h1>
+        <p>Nos comprometemos a fabricar productos de alta calidad que no solo cumplan, sino que superen los estándares técnicos y regulatorios, asegurando la satisfacción de nuestros clientes.</p>
+    </div>
+</div>
+
+<section class="bg-concrete-50">
+    <?php include 'includes/grupoServicios.php' ?>
+
+</section>
+
+<?php include 'includes/footer.php' ?>

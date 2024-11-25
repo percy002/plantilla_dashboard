@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php
+require_once '../config/database.php';
+
+$query = $pdo->query("SELECT * FROM contacto LIMIT 1");
+$contacto = $query->fetch(PDO::FETCH_ASSOC);
+
+$query_empresa = $pdo->query("SELECT * FROM empresa LIMIT 1");
+$empresa = $query_empresa->fetch(PDO::FETCH_ASSOC);
+
+$query_portada = $pdo->query("SELECT * FROM portada LIMIT 1");
+$portada = $query_portada->fetch(PDO::FETCH_ASSOC);
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/assets/css/normalize.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/assets/css/estilos.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo ($portada['imagen_icono'] ?? '') ?>" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
-    <title>Hielos Point</title>
+    <title><?php echo ($empresa['nombre'] ?? '') ?></title>
 
     <style>
+        :root {
+            --fuente-primaria: 'Inter', sans-serif;
+
+            --gris: #545C63;
+
+            --color-primario: <?= ($portada['color_primario'] ?? '#FF0000') ?>;
+            --color-secundario: <?= ($portada['color_secundario'] ?? '#FF0000') ?>;;
+            --color-terciario: #fff;
+        }
+
         a:hover {
             text-decoration: none;
             color: var(--color-secundario);
@@ -96,20 +119,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<?php
-require_once '../config/database.php';
 
-// Consultar datos de la tabla empresa
-
-$query = $pdo->query("SELECT * FROM contacto LIMIT 1");
-$contacto = $query->fetch(PDO::FETCH_ASSOC);
-?>
 <body>
     <header class="header">
         <div class="navbar-info" style="background-color: var(--color-primario);">
-            <div class="navbar-info__item"><i class="fas fa-map-marker-alt"></i><?= htmlspecialchars($contacto['direccion'] ?? '') ?></div>
-            <div class="navbar-info__item"><i class="fas fa-envelope"></i><?= htmlspecialchars($contacto['correo_electronico'] ?? '') ?></div>
-            <div class="navbar-info__item"><i class="fas fa-mobile-alt"></i><?= htmlspecialchars($contacto['telefono1']) ?? '' ?> <?= htmlspecialchars($contacto['telefono2'] ?? '') ?> </div>
+            <div class="navbar-info__item"><i class="fas fa-map-marker-alt"></i><?= ($contacto['direccion'] ?? '') ?></div>
+            <div class="navbar-info__item"><i class="fas fa-envelope"></i><?= ($contacto['correo_electronico'] ?? '') ?></div>
+            <div class="navbar-info__item"><i class="fas fa-mobile-alt"></i>
+                <?= ($contacto['telefono1']) ?? '' ?>  
+                <?php  
+                if ($contacto['telefono2']) {
+                    echo  ('| '. $contacto['telefono2'] ?? '');
+                } 
+                ?>
+        
+            </div>
+            
             <div class="navbar-info__item">
                 <div class="redes__iconos">
                     <a target="_blank" href="<?= htmlspecialchars($contacto['instagram']) ?? '' ?>"><i class="fab fa-facebook"></i></a>
@@ -122,7 +147,7 @@ $contacto = $query->fetch(PDO::FETCH_ASSOC);
         <nav class="navbar navbar-expand-lg navbar-light py-2">
             <div class="container-fluid navbar__contenido">
                 <a class="navbar-brand navbar__logo" href="./">
-                    <img src="assets/imagenes/logos/logo_color.png" alt="">
+                    <img src="<?php echo ($portada['logo_color'] ?? '') ?>" alt="">
 
                 </a>
                 <div class="navbar__carrito-mobile">
@@ -144,7 +169,7 @@ $contacto = $query->fetch(PDO::FETCH_ASSOC);
                         $menu_items = [
                             '' => 'Inicio',
                             'nosotros' => 'Nosotros',
-                            'servicios' => 'Productos',
+                            'productos' => 'Productos',
                             'contacto' => 'Contacto'
                         ];
 

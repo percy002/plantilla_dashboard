@@ -11,10 +11,13 @@ switch ($uri) {
         require '../pages/portada.php';
         break;
     case '/nosotros':
-        require '../pages/empresa.php';
+        require '../pages/nosotros.php';
         break;
     case '/productos':
         require '../pages/productos.php';
+        break;
+    case '/producto':
+        require '../pages/producto.php';
         break;
     case '/contacto':
         require '../pages/contacto.php';

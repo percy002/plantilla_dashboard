@@ -1,9 +1,39 @@
+<?php
+$query_productos = $pdo->query("SELECT * FROM productos");
+$productos = $query_productos->fetchAll(PDO::FETCH_ASSOC);
+?>
 <div class="container-xl">
     <div class="bg-servicio-opacity">
         <div class="servicio">
 
+            <?php
+            $productos_mostrados = array_slice($productos, 0, 3);
+
+            foreach ($productos_mostrados as $i => $producto) {
+                echo 
+                '<div class="servicio__card" id="servicio' . ($i + 1) . '">
+                    <div class="servicio__card__imagen">
+                        <img class="" src="'.$producto['imagen'].'" alt="" loading="lazy">
+                    </div>
+                    <div class="servicio__card__descripcion">
+                        <h4 class="servicio__card__titulo">' . ($producto['nombre_producto']) . '</h4>
+                        <p class="servicio__card__precio" hidden>S/. Consultar</p>
+                        <p class="servicio__card__descripcion_breve"></p>
+                        <div class="servicio__card__descripcion_extensa" hidden>
+                            <p>'.$producto['descripcion'].'</p>
+                        </div>
+                        <div class="servicio__card__button">
+                            <button class="detalleServicio">Detalles</button>
+                            <button onclick="agregarProducto(\'servicio' . ($i + 1) . '\')">Agregar</button>
+                        </div>
+                    </div>
+                </div>';
+            }
+
+            ?>
+
             <!-- producto - servicio 1 -->
-            <div class="servicio__card" id="servicio1">
+            <!-- <div class="servicio__card" id="servicio1">
                 <div class="servicio__card__imagen">
                     <img class="" src="assets/imagenes/servicios/servicio_imagen1.png" alt="" loading="lazy">
                 </div>
@@ -19,10 +49,10 @@
                         <button onclick="agregarProducto('servicio1')">Agregar</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- producto - servicio 2 -->
-            <div class="servicio__card" id="servicio2">
+            <!-- <div class="servicio__card" id="servicio2">
                 <div class="servicio__card__imagen">
                     <img class="" src="assets/imagenes/servicios/servicio_imagen2.png" alt="" loading="lazy">
                 </div>
@@ -38,10 +68,10 @@
                         <button onclick="agregarProducto('servicio2')">Agregar</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- producto - servicio 3 -->
-            <div class="servicio__card" id="servicio3">
+            <!-- <div class="servicio__card" id="servicio3">
                 <div class="servicio__card__imagen">
                     <img class="" src="assets/imagenes/servicios/servicio_imagen3.png" alt="" loading="lazy">
                 </div>
@@ -57,7 +87,7 @@
                         <button onclick="agregarProducto('servicio3')">Agregar</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- producto - servicio 4 -->
             <!-- <div class="servicio__card" id="servicio4">
                 <div class="servicio__card__imagen">
@@ -114,7 +144,7 @@
             </div> -->
 
             <!-- Mostrar solo para pagina productos - servicios -->
-            <?php if (basename($_SERVER['REQUEST_URI']) == 'servicios'): ?>
+            <?php if (basename($_SERVER['REQUEST_URI']) == 'productos'): ?>
                 <!-- Agregar Nuevo Card para agregar más productos para página servicios -->
 
                 <!-- <div class="servicio__card" id="servicio7">
@@ -135,7 +165,7 @@
                     </div>
                 </div> -->
 
-                
+
             <?php endif ?>
         </div>
     </div>

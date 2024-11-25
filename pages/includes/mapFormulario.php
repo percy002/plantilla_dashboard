@@ -1,6 +1,10 @@
+<?php
+$query_contacto = $pdo->query("SELECT * FROM contacto");
+$contacto = $query_contacto->fetch(PDO::FETCH_ASSOC);
+?>
 <div class="contacto__info  container-xl">
     <div class="contacto__info__mapa ratio ratio-1x1">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1630.9799568716774!2d-71.95904476278548!3d-13.526634047953767!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916dd53a28296a3d%3A0x88277758f95cd163!2sHielos%20Point%20Cusco!5e0!3m2!1ses-419!2spe!4v1728481947818!5m2!1ses-419!2spe" width="500" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <?php echo ($contacto['mapa'] ?? '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.1718264298793!2d-71.96603425652692!3d-13.525044512131613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916dd5d6b1bb822f%3A0xf159767e176be009!2sGEREPRO%20-%20Gerencia%20Regional%20de%20Producci%C3%B3n.!5e0!3m2!1ses!2spe!4v1732542086915!5m2!1ses!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>') ?>
     </div>
     <div class="contacto__info__formulario">
         <div class="formulario">

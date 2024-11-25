@@ -1,24 +1,9 @@
 /*Estilo globales*/
-:root {
-    --fuente-primaria: 'Inter', sans-serif;
 
-    --gris: #545C63;
-
-    --color-primario: #001641;
-    --color-secundario: #FEBF17;
-    --color-terciario: #fff;
-}
 
 body {
     font-family: var(--fuente-primaria);
 }
-
-/* @media (min-width:1200px) {
-    section{
-        padding-left: 10rem;
-        padding-right: 10rem;
-    }
-} */
 
 h1,
 h2 {
@@ -368,8 +353,8 @@ img {
 }
 
 .footer_empresa img {
-    width: 70%;
-    height: auto;
+    width: auto;
+    max-height: 250px;
     object-fit: contain;
 }
 
@@ -701,8 +686,8 @@ img {
 }
 
 .nosotros__historia__logo img {
-    width: 575px;
-    height: auto;
+    width: auto;
+    height: 300px;
     object-fit: contain;
 }
 

@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         servicioId
       };
       localStorage.setItem("servicioData", JSON.stringify(servicioData));
-      window.location.href = "servicio.php";
+      window.location.href = "producto";
     });
   });
 
